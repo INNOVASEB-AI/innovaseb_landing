@@ -1,100 +1,83 @@
 import { motion, useReducedMotion } from "framer-motion";
 
-const serviceCards = [
+const serviceList = [
   {
     number: "01",
-    title: "AI Advisory",
-    description:
-      "Opportunity mapping, workflow redesign, and practical AI adoption plans that reduce busywork instead of adding more tools."
+    title: "AI Consulting"
   },
   {
     number: "02",
-    title: "Operational Systems",
-    description:
-      "Back-office structure, documentation, and administration processes that keep teams aligned when work starts moving fast."
+    title: "Office Administration Expertise"
   },
   {
     number: "03",
-    title: "Custom Software",
+    title: "Software Solutions"
+  },
+  {
+    number: "04",
+    title: "Research & Prototyping Support",
     description:
-      "Internal dashboards, automations, and client-facing products built around the exact way your business already operates."
+      "Technical support for researchers and innovators, including prototype development and implementation assistance."
   }
-];
-
-const approachSteps = [
-  {
-    title: "Audit the friction",
-    body: "We identify repeat work, gaps between tools, and the points where decisions slow down."
-  },
-  {
-    title: "Design the system",
-    body: "We shape a lean operating model with the right mix of AI workflows, process, and software."
-  },
-  {
-    title: "Ship with clarity",
-    body: "You get implementation support, clean handover documentation, and a setup that can actually be maintained."
-  }
-];
-
-const proofPoints = [
-  "AI strategy grounded in real operational constraints",
-  "Administration expertise for teams that need structure",
-  "Software delivery without enterprise overhead"
 ];
 
 export default function App() {
   const prefersReducedMotion = useReducedMotion();
 
-  const floatingAnimation = prefersReducedMotion
+  const ambientShift = prefersReducedMotion
     ? undefined
-    : { x: [0, 30, 0], y: [0, -18, 0] };
+    : { x: [0, 8, 0], y: [0, 6, 0] };
 
-  const floatingAnimationRight = prefersReducedMotion
+  const glowLeft = prefersReducedMotion
     ? undefined
-    : { x: [0, -18, 0], y: [0, 20, 0] };
+    : { x: [0, 24, 0], y: [0, -12, 0] };
 
-  const gridAnimation = prefersReducedMotion
+  const glowRight = prefersReducedMotion
     ? undefined
-    : { x: [0, 10, 0], y: [0, 8, 0] };
+    : { x: [0, -18, 0], y: [0, 14, 0] };
 
-  const fadeUp = prefersReducedMotion
+  const enterUp = prefersReducedMotion
     ? { opacity: 1, y: 0 }
     : { opacity: 0, y: 24 };
 
   return (
-    <main className="page-shell">
+    <main className="landing">
       <motion.div
         aria-hidden="true"
-        className="page-glow page-glow-left"
-        animate={floatingAnimation}
+        className="bg-grid"
+        animate={ambientShift}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="bg-sheen"
+        animate={prefersReducedMotion ? undefined : { opacity: [0.03, 0.05, 0.03] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="bg-orb bg-orb-left"
+        animate={glowLeft}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden="true"
-        className="page-glow page-glow-right"
-        animate={floatingAnimationRight}
+        className="bg-orb bg-orb-right"
+        animate={glowRight}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div
-        aria-hidden="true"
-        className="page-grid"
-        animate={gridAnimation}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-      />
 
-      <div className="page-frame">
-        <header className="site-header">
+      <section className="shell">
+        <header className="header">
           <a
             className="brand"
             href="#top"
           >
-            <span className="brand-mark">IN</span>
-            <span className="brand-name">Innovaseb</span>
+            Innovaseb
           </a>
 
-          <nav className="site-nav">
+          <nav className="nav">
             <a href="#services">Services</a>
-            <a href="#approach">Approach</a>
             <a href="#contact">Contact</a>
           </nav>
         </header>
@@ -106,144 +89,93 @@ export default function App() {
           <div className="hero-copy">
             <motion.p
               className="eyebrow"
-              initial={fadeUp}
+              initial={enterUp}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              AI · Operations · Software
+              AI · Operations · Software · Research Support
             </motion.p>
 
             <motion.h1
               className="hero-title"
-              initial={fadeUp}
+              initial={enterUp}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.05 }}
+              transition={{ duration: 0.65, delay: 0.06 }}
             >
               Smarter systems.
               <br />
-              <span>Less friction.</span>
+              Less friction.
             </motion.h1>
 
             <motion.p
               className="hero-body"
-              initial={fadeUp}
+              initial={enterUp}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.12 }}
+              transition={{ duration: 0.65, delay: 0.12 }}
             >
-              Innovaseb helps growing businesses bring order to operations,
-              apply AI where it genuinely helps, and build the software needed
-              to scale with less manual drag.
+              Innovaseb helps organisations improve operations through AI
+              consulting, operational expertise, software solutions, and
+              research-focused technical support.
             </motion.p>
 
             <motion.div
               className="hero-actions"
-              initial={fadeUp}
+              initial={enterUp}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.18 }}
+              transition={{ duration: 0.65, delay: 0.18 }}
             >
               <a
                 className="button button-primary"
-                href="mailto:hello@innovaseb.tech"
+                href="#contact"
               >
-                Start a conversation
+                Contact
               </a>
               <a
-                className="button button-secondary"
+                className="text-link"
                 href="#services"
               >
-                Explore services
+                Services
               </a>
             </motion.div>
           </div>
 
           <motion.aside
-            className="hero-panel"
-            initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 28 }}
+            className="hero-side"
+            initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.22 }}
+            transition={{ duration: 0.65, delay: 0.2 }}
           >
-            <p className="panel-label">What we bring</p>
-            <ul className="proof-list">
-              {proofPoints.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-
-            <div className="hero-stat-grid">
-              <div>
-                <strong>Ops-first</strong>
-                <span>Solutions shaped around real workflow constraints.</span>
-              </div>
-              <div>
-                <strong>Lean delivery</strong>
-                <span>Built for teams that need momentum, not bureaucracy.</span>
-              </div>
-            </div>
+            <p className="side-label">Scope</p>
+            <p className="side-note">
+              Consulting and implementation support across AI, operations,
+              software, and research-led technical work.
+            </p>
           </motion.aside>
         </section>
 
         <section
-          className="strip"
-          aria-label="Company focus"
-        >
-          <span>AI workflow design</span>
-          <span>Administration systems</span>
-          <span>Internal tools</span>
-          <span>Automation strategy</span>
-        </section>
-
-        <section
-          className="content-section"
+          className="services"
           id="services"
         >
-          <div className="section-heading">
-            <p className="section-kicker">Services</p>
-            <h2>Three ways to reduce drag and make the business easier to run.</h2>
+          <div className="section-label">
+            <p>Services</p>
           </div>
 
           <div className="service-grid">
-            {serviceCards.map((service, index) => (
+            {serviceList.map((service, index) => (
               <motion.article
+                className="service-row"
                 key={service.title}
-                className="service-card"
-                initial={fadeUp}
+                initial={enterUp}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
+                transition={{ duration: 0.55, delay: 0.24 + index * 0.08 }}
               >
-                <p className="service-number">{service.number}</p>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </motion.article>
-            ))}
-          </div>
-        </section>
-
-        <section
-          className="content-section approach-grid"
-          id="approach"
-        >
-          <div className="section-heading">
-            <p className="section-kicker">Approach</p>
-            <h2>Clear structure before complexity.</h2>
-            <p className="section-copy">
-              The goal is not to automate everything. The goal is to build a
-              sharper operating system for the work that actually matters.
-            </p>
-          </div>
-
-          <div className="approach-list">
-            {approachSteps.map((step, index) => (
-              <motion.article
-                key={step.title}
-                className="approach-card"
-                initial={fadeUp}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-              >
-                <span className="step-index">0{index + 1}</span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
+                <div className="service-index">
+                  <p className="service-number">{service.number}</p>
+                </div>
+                <div className="service-copy">
+                  <h2>{service.title}</h2>
+                  {service.description ? <p className="service-body">{service.description}</p> : null}
                 </div>
               </motion.article>
             ))}
@@ -251,33 +183,24 @@ export default function App() {
         </section>
 
         <section
-          className="contact-panel"
+          className="contact"
           id="contact"
         >
           <div>
-            <p className="section-kicker">Contact</p>
-            <h2>Let&apos;s design a business that runs with less friction.</h2>
-          </div>
-
-          <div className="contact-actions">
-            <p>
-              Based in South Africa, working remotely with teams that need
-              stronger systems, clearer workflows, and practical AI adoption.
+            <p className="section-heading">Contact</p>
+            <p className="contact-copy">
+              For consulting, implementation, or collaboration enquiries.
             </p>
-            <a
-              className="button button-primary"
-              href="mailto:hello@innovaseb.tech"
-            >
-              hello@innovaseb.tech
-            </a>
           </div>
-        </section>
 
-        <footer className="site-footer">
-          <span>Innovaseb</span>
-          <span>AI consulting, operations expertise, and software systems.</span>
-        </footer>
-      </div>
+          <a
+            className="contact-link"
+            href="mailto:hello@innovaseb.com"
+          >
+            hello@innovaseb.com
+          </a>
+        </section>
+      </section>
     </main>
   );
 }
